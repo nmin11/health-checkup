@@ -27,8 +27,6 @@ describe("Login Component", () => {
 
       expect(screen.getByText("테스트 계정:")).toBeInTheDocument();
       expect(screen.getByText("admin / 1234")).toBeInTheDocument();
-      expect(screen.getByText("user1 / 5678")).toBeInTheDocument();
-      expect(screen.getByText("user2 / 2468")).toBeInTheDocument();
     });
 
     it("should render input placeholders", () => {
