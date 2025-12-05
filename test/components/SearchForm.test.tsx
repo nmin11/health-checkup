@@ -5,14 +5,14 @@ import SearchForm from "@/components/SearchForm";
 import { useAuthStore } from "@/store/authStore";
 
 // Mock fetch
-global.fetch = vi.fn();
+globalThis.fetch = vi.fn() as any;
 
 describe("SearchForm Component", () => {
   const mockOnBack = vi.fn();
 
   beforeEach(() => {
     mockOnBack.mockClear();
-    (global.fetch as any).mockClear();
+    (globalThis.fetch as any).mockClear();
     const { logout, login } = useAuthStore.getState();
     logout();
     login("admin", "1234");
@@ -124,8 +124,7 @@ describe("SearchForm Component", () => {
       expect(startDateInput.value).toBe("2020");
     });
 
-    it("should limit birthdate to 8 characters", async () => {
-      const user = userEvent.setup();
+    it("should limit birthdate to 8 characters", () => {
       render(<SearchForm onBack={mockOnBack} />);
 
       const birthdateInput = screen.getByLabelText(
@@ -135,8 +134,7 @@ describe("SearchForm Component", () => {
       expect(birthdateInput.maxLength).toBe(8);
     });
 
-    it("should limit phone number to 11 characters", async () => {
-      const user = userEvent.setup();
+    it("should limit phone number to 11 characters", () => {
       render(<SearchForm onBack={mockOnBack} />);
 
       const phoneInput = screen.getByLabelText(
@@ -201,7 +199,7 @@ describe("SearchForm Component", () => {
     it("should call API when form is submitted with valid data", async () => {
       const user = userEvent.setup();
 
-      (global.fetch as any).mockResolvedValueOnce({
+      (globalThis.fetch as any).mockResolvedValueOnce({
         json: async () => ({
           status: "success",
           data: {
@@ -225,7 +223,7 @@ describe("SearchForm Component", () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalledWith(
+        expect(globalThis.fetch).toHaveBeenCalledWith(
           "/api/v1/nhis/checkup?response_type=candiy",
           expect.objectContaining({
             method: "POST",
@@ -240,7 +238,7 @@ describe("SearchForm Component", () => {
     it("should show loading state during submission", async () => {
       const user = userEvent.setup();
 
-      (global.fetch as any).mockImplementation(
+      (globalThis.fetch as any).mockImplementation(
         () =>
           new Promise((resolve) =>
             setTimeout(
@@ -278,7 +276,7 @@ describe("SearchForm Component", () => {
     it("should show error message on API failure", async () => {
       const user = userEvent.setup();
 
-      (global.fetch as any).mockResolvedValueOnce({
+      (globalThis.fetch as any).mockResolvedValueOnce({
         json: async () => ({
           status: "error",
         }),
@@ -310,7 +308,7 @@ describe("SearchForm Component", () => {
         .spyOn(console, "error")
         .mockImplementation(() => {});
 
-      (global.fetch as any).mockRejectedValueOnce(new Error("Network error"));
+      (globalThis.fetch as any).mockRejectedValueOnce(new Error("Network error"));
 
       render(<SearchForm onBack={mockOnBack} />);
 
@@ -348,7 +346,7 @@ describe("SearchForm Component", () => {
     it("should disable submit button during loading", async () => {
       const user = userEvent.setup();
 
-      (global.fetch as any).mockImplementation(
+      (globalThis.fetch as any).mockImplementation(
         () =>
           new Promise((resolve) =>
             setTimeout(
