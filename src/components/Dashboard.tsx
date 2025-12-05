@@ -30,7 +30,7 @@ interface DashboardProps {
 export default function Dashboard({ data, onBack }: DashboardProps) {
   const [showHistory, setShowHistory] = useState(false);
 
-  const latestCheckup = data.overviewList[0];
+  const latestCheckup = data.overviewList[data.overviewList.length - 1];
 
   // 건강 상태 판단 함수
   const getHealthStatus = (

@@ -56,9 +56,9 @@ export interface CheckupResult {
   organizationName: string;
   checkupFindings: string;
   pdfData: string;
-  questionnaire: any[];
-  infantsCheckupList: any[];
-  infantsDentalList: any[];
+  questionnaire: string[];
+  infantsCheckupList: string[];
+  infantsDentalList: string[];
 }
 
 export interface HealthCheckupData {
