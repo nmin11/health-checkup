@@ -15,8 +15,7 @@ interface AuthState {
 // Mock users
 const mockUsers: Record<string, { password: string; name: string }> = {
   admin: { password: "1234", name: "홍길동" },
-  user1: { password: "5678", name: "이순신" },
-  user2: { password: "2468", name: "유관순" },
+  assignee: { password: "1124", name: "남궁민" },
 };
 
 export const useAuthStore = create<AuthState>((set) => ({

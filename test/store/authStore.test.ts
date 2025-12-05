@@ -35,26 +35,26 @@ describe("authStore", () => {
       });
     });
 
-    it("should successfully login user1", () => {
+    it("should successfully login assignee", () => {
       const { login } = useAuthStore.getState();
 
-      const success = login("user1", "5678");
+      const success = login("assignee", "1124");
 
       expect(success).toBe(true);
 
       const state = useAuthStore.getState();
-      expect(state.user?.name).toBe("이순신");
+      expect(state.user?.name).toBe("남궁민");
     });
 
-    it("should successfully login user2", () => {
+    it("should successfully login admin again", () => {
       const { login } = useAuthStore.getState();
 
-      const success = login("user2", "2468");
+      const success = login("admin", "1234");
 
       expect(success).toBe(true);
 
       const state = useAuthStore.getState();
-      expect(state.user?.name).toBe("유관순");
+      expect(state.user?.name).toBe("홍길동");
     });
 
     it("should fail login with invalid username", () => {

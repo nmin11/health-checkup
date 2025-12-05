@@ -79,8 +79,6 @@ export default function Login() {
         <div className="mt-4 text-sm text-gray-600 text-center">
           <p className="font-semibold mb-2">테스트 계정:</p>
           <p>admin / 1234</p>
-          <p>user1 / 5678</p>
-          <p>user2 / 2468</p>
         </div>
       </div>
     </div>
